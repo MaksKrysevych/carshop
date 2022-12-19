@@ -1,5 +1,6 @@
 package carshop.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -24,5 +25,11 @@ public class HomeController {
     @GetMapping("/sign-up")
     public String signUp(){
         return "signUp";
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/profile")
+    public String profile(){
+        return "profile";
     }
 }

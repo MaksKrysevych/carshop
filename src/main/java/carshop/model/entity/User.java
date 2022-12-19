@@ -16,7 +16,7 @@ public class User {
     @Column(name = "email", nullable = false, length = 45)
     private String email;
     @Basic
-    @Column(name = "password", nullable = false, length = 45)
+    @Column(name = "password", nullable = false, length = 500)
     private String password;
     @Basic
     @Column(name = "name", nullable = false, length = 45)
@@ -25,8 +25,8 @@ public class User {
     @Column(name = "surname", nullable = false, length = 45)
     private String surname;
     @Basic
-    @Column(name = "role", nullable = false)
-    private Roles role;
+    @Column(name = "role", nullable = false, length = 45)
+    private String role;
     @Basic
     @Column(name = "phone", nullable = false)
     private int phone;

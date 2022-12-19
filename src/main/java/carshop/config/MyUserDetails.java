@@ -15,21 +15,21 @@ public class MyUserDetails implements UserDetails {
     }
 
     @Override
-    public String getPassword() {
-        return user.getPassword();
-    }
-
-    @Override
     public String getUsername() {
         return user.getEmail();
     }
 
     @Override
+    public String getPassword() {
+        return user.getPassword();
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(user.getRole().toString()
+        return Arrays.stream(user.getRole()
                         .split(""))
-                .map(SimpleGrantedAuthority::new)
-                .toList();
+                        .map(SimpleGrantedAuthority::new)
+                        .toList();
     }
 
     @Override

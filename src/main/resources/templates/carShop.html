@@ -15,10 +15,12 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a th:href="@{/}"  class="nav-link px-2 link-secondary">Home</a></li>
             <li><a th:href="@{/catalog}"  class="nav-link px-2 link-dark">Catalog</a></li>
-            <li><a th:href="@{/login}"  class="nav-link px-2 link-dark">Login</a></li>
-            <li><a th:href="@{/signUp}"  class="nav-link px-2 link-dark">Sign-Up</a></li>
         </ul>
-
+        <div sec:authorize="isAuthenticated()">
+            <div class="col-md-3 text-end">
+                <a type="button" th:href="@{/profile}" class="btn btn-outline-primary me-2">Profile</a>
+            </div>
+        </div>
         <div sec:authorize="!isAuthenticated()">
             <div class="col-md-3 text-end">
                 <a type="button" th:href="@{/login}" class="btn btn-outline-primary me-2">Login</a>
