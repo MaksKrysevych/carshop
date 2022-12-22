@@ -1,6 +1,5 @@
 package carshop.model.entity;
 
-import carshop.model.enums.Roles;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +30,6 @@ public class User {
     @Column(name = "phone", nullable = false)
     private int phone;
     @Basic
-    @Column(name = "account", nullable = true)
+    @Column(name = "account", nullable = false)
     private Integer account;
 }
