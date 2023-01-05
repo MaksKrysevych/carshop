@@ -24,14 +24,18 @@ public class WebSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/catalog/**", "login").permitAll()
+                        .requestMatchers("/", "/catalog/**", "/details/**" , "/login", "/login-error", "/sign-up").permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userDetailsService)
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginPage("/sign-up")
+                        .defaultSuccessUrl("/")
                         .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
                 )
                 .build();
     }
