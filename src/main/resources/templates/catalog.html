@@ -14,7 +14,6 @@
             margin: 20px auto 30px auto;
             max-width: 100%;
             height: auto;
-            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -62,9 +61,9 @@
                 </div>
                 <div class="row">
                     <strong>
-                        <span th:text="#{catalog.label.name}"/>: <td th:text="${car.brand}"/> <br/>
-                        <span th:text="#{catalog.label.regions}"/>: <td th:text="${car.model}"/><br/>
-                        <span th:text="#{catalog.label.liner}"/>: <td th:text="${car.graduationYear}"/><br/>
+                        <span th:text="#{catalog.label.brand}"/>: <span th:text="${car.brand}"/> <br/>
+                        <span th:text="#{catalog.label.model}"/>: <span th:text="${car.model}"/><br/>
+                        <span th:text="#{catalog.label.graduationYear}"/>: <span th:text="${car.graduationYear}"/><br/>
                         <h4 class="front-weight-bold blue-text">
                             <a th:href="@{/details/{id}(id=${car.carId})}">
                                 <strong><span th:text="#{catalog.button.details}"></span></strong>
