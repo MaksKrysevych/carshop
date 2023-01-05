@@ -1,7 +1,5 @@
 package carshop.controllers;
 
-import carshop.repository.CarRepository;
-import carshop.repository.GalleryRepository;
 import carshop.service.CarService;
 import carshop.service.GalleryService;
 import org.springframework.stereotype.Controller;
@@ -21,8 +19,8 @@ public class CatalogController {
 
     @GetMapping("/catalog")
     public String catalog(Model model){
-        model.addAttribute("cars", new CarRepository().getAllCars());
-        model.addAttribute("galleries", new GalleryRepository().getAllGalleries());
+        model.addAttribute("cars", carService.getAllCars());
+        model.addAttribute("galleries", galleryService.getAllGalleries());
 
         return "catalog";
     }
@@ -30,6 +28,7 @@ public class CatalogController {
     @GetMapping("/details/{id}")
     public String details(@PathVariable(value = "id") Long car_id, Model model){
         model.addAttribute("car", carService.getCarById(car_id));
+        model.addAttribute("gallery", galleryService.getGalleryById(car_id));
 
         return "details";
     }

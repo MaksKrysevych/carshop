@@ -13,10 +13,10 @@
         <property name="show_sql">true</property>
 
         <mapping class="carshop.model.entity.Advertisement"/>
-        <mapping class="carshop.model.entity.Car"/>
+        <mapping resource="User.hbm.xml"/>
         <mapping class="carshop.model.entity.Gallery"/>
         <mapping class="carshop.model.entity.Request"/>
         <mapping class="carshop.model.entity.Storage"/>
-        <mapping class="carshop.model.entity.User"/>
+        <mapping class="carshop.model.entity.Car"/>
     </session-factory>
 </hibernate-configuration>

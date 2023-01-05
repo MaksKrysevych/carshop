@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+
+    <class name="carshop.model.entity.User" table="user">
+        <id name="email" column="email"/>
+        <property name="password" column="password"/>
+        <property name="name" column="name"/>
+        <property name="surname" column="surname"/>
+        <property name="role" column="role"/>
+        <property name="phone" column="phone"/>
+        <property name="account" column="account"/>
+    </class>
+</hibernate-mapping>
