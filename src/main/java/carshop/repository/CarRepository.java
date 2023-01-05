@@ -19,7 +19,7 @@ public class CarRepository {
         try (final Session session = factory.openSession()) {
             session.beginTransaction();
 
-            cars = session.createQuery("from Car", Car.class).getResultList();
+            cars = session.createQuery("from Car ", Car.class).getResultList();
 
             session.getTransaction().commit();
         }
@@ -39,7 +39,7 @@ public class CarRepository {
         try (final Session session = factory.openSession()) {
             session.beginTransaction();
 
-            session.persist(car);
+            session.merge(car);
 
             session.getTransaction().commit();
         }

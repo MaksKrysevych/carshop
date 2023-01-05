@@ -39,7 +39,7 @@ public class StorageRepository {
         try (final Session session = factory.openSession()) {
             session.beginTransaction();
 
-            session.persist(storage);
+            session.merge(storage);
 
             session.getTransaction().commit();
         }

@@ -40,7 +40,7 @@ public class RequestRepository {
         try (final Session session = factory.openSession()) {
             session.beginTransaction();
 
-            session.persist(request);
+            session.merge(request);
 
             session.getTransaction().commit();
         }

@@ -2,7 +2,6 @@ package carshop.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.sql.Date;
 
 @Entity

@@ -55,7 +55,7 @@ class UserServiceTest {
 
     @Test
     void updateUser() {
-        when(userRepository.updateUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.USER.toString(), 4356576, 0))).thenReturn(userList.get(1));
+        when(userRepository.updateUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.ADMIN.toString(), 4356576, 0))).thenReturn(userList.get(1));
         assertEquals(userList.get(1).getRole(), userService.updateUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.ADMIN.toString(), 4356576, 0)).getRole());
     }
 

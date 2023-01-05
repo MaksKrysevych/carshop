@@ -39,7 +39,7 @@ public class UserRepository {
         try (final Session session = factory.openSession()) {
             session.beginTransaction();
 
-            session.persist(user);
+            session.merge(user);
 
             session.getTransaction().commit();
         }

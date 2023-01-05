@@ -38,7 +38,7 @@ public class AdvertisementRepository {
         try (final Session session = factory.openSession()) {
             session.beginTransaction();
 
-            session.persist(advertisement);
+            session.merge(advertisement);
 
             session.getTransaction().commit();
         }

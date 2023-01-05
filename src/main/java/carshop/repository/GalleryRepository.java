@@ -39,7 +39,7 @@ public class GalleryRepository {
         try (final Session session = factory.openSession()) {
             session.beginTransaction();
 
-            session.persist(gallery);
+            session.merge(gallery);
 
             session.getTransaction().commit();
         }
