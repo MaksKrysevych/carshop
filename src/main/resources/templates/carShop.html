@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title>CarShop</title>
+    <title th:text="#{page.carshop}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -11,23 +11,51 @@
 <body>
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+        </a>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a th:href="@{/}"  class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a th:href="@{/catalog}"  class="nav-link px-2 link-dark">Catalog</a></li>
+            <li><a th:href="@{/}"  class="nav-link px-2 link-dark" th:text="#{header.home}"/></li>
+            <li><a th:href="@{/catalog}"  class="nav-link px-2 link-dark" th:text="#{header.catalog}"/></li>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/profile}" class="nav-link px-2 link-dark" th:text="#{header.profile}"/>
+            </li>
         </ul>
         <div sec:authorize="isAuthenticated()">
-            <div class="col-md-3 text-end">
-                <a type="button" th:href="@{/profile}" class="btn btn-outline-primary me-2">Profile</a>
-            </div>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" th:value="#{header.logout}"/>
+            </form>
         </div>
         <div sec:authorize="!isAuthenticated()">
-            <div class="col-md-3 text-end">
-                <a type="button" th:href="@{/login}" class="btn btn-outline-primary me-2">Login</a>
-                <a type="button" th:href="@{/signUp}" class="btn btn-outline-primary me-2">Sign-up</a>
-            </div>
+            <a type="button" th:href="@{/login}" class="btn btn-outline-primary me-2" th:text="#{header.login}"/>
+            <a type="button" th:href="@{/sign-up}" class="btn btn-outline-primary me-2" th:text="#{header.signUp}"/>
         </div>
+        <select id="locales">
+            <option hidden value="" th:text="#{language}"></option>
+            <option value="en" th:text="#{language.eng}"></option>
+            <option value="ua" th:text="#{language.ua}"></option>
+        </select>
     </header>
+
+    <h1 th:text="#{greeting}"></h1>
+
 </div>
+<footer class="d-flex justify-content-center py-3">
+    <p class="text-center text-muted">© 2022 CarShop, Inc</p>
+</footer>
+<!-- Footer -->
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            const selectedOption = $('#locales').val();
+            if (selectedOption !== ''){
+                window.location.replace('/?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
 </html>

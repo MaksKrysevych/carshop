@@ -2,23 +2,12 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{page.catalog}"/>
+    <title th:text="#{page.profile}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <style>
-        /* CSS */
-        .image {
-            display: block;
-            margin: 20px auto 30px auto;
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 30px;
-        }
-    </style>
 </head>
-<body>
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <a href="" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
@@ -47,34 +36,29 @@
             <option value="ua" th:text="#{language.ua}"></option>
         </select>
     </header>
-</div>
-<div class="row d-flex h-75 justify-content-center align-items-center p-0">
 
-    <div class="col-lg-3 col-mb-6 mb-4">
+    <div class="container">
         <div class="row">
-            <th:block th:each="car:${cars}">
-                <div class="view overlay">
-                    <th:block th:each="gallery:${galleries}">
-                        <div th:if="${car.carId} == ${gallery.carId}">
-                        <img  th:class="image" th:src="${gallery.photo}">
-                        </div>
-                    </th:block>
-                </div>
-                <div class="row">
-                    <strong>
-                        <span th:text="#{catalog.label.name}"/>: <td th:text="${car.brand}"/> <br/>
-                        <span th:text="#{catalog.label.regions}"/>: <td th:text="${car.model}"/><br/>
-                        <span th:text="#{catalog.label.liner}"/>: <td th:text="${car.graduationYear}"/><br/>
-                        <h4 class="front-weight-bold blue-text">
-                            <a th:href="@{/details/{id}(id=${car.carId})}">
-                                <strong><span th:text="#{catalog.button.details}"></span></strong>
-                            </a>
-                        </h4>
-                    </strong>
-                </div>
-            </th:block>
+            <strong>
+                <span th:text="#{profile.label.firstname}"/>: <span th:text="${user.name}"></span><br/>
+                <span th:text="#{profile.label.lastname}"/>: <span th:text="${user.surname}"></span><br/>
+                <span th:text="#{profile.label.phone}"/>: <span th:text="${user.phone}"></span><br/>
+                <span th:text="#{profile.label.email}"/>: <span th:text="${user.email}"></span><br/>
+                <span th:text="#{profile.label.account}"/>: <span th:text="${user.account}"></span><br/>
+                            <h4 class="front-weight-bold blue-text">
+                                <a th:href="@{/edit}">
+                                    <strong><span th:text="#{profile.button.edit}"></span></strong>
+                                </a>
+                            </h4>
+                            <h4 class="front-weight-bold blue-text">
+                                <a th:href="@{/topup}">
+                                    <strong><span th:text="#{profile.button.topup}"></span></strong>
+                                </a>
+                            </h4>
+            </strong>
         </div>
     </div>
+
 </div>
 <footer class="d-flex justify-content-center py-3">
     <p class="text-center text-muted">© 2022 CarShop, Inc</p>
@@ -88,7 +72,7 @@
         $("#locales").change(function () {
             const selectedOption = $('#locales').val();
             if (selectedOption !== ''){
-                window.location.replace('/catalog?lang=' + selectedOption);
+                window.location.replace('/profile?lang=' + selectedOption);
             }
         });
     });
