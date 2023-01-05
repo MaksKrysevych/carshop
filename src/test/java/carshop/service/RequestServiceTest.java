@@ -33,8 +33,8 @@ class RequestServiceTest {
     static List<Request> requestList = new ArrayList<>();
 
     static {
-        requestList.add(new Request(1L, 1L, "1", Date.valueOf("2022-02-02"), Statuses.CREATED));
-        requestList.add(new Request(1L, 1L, "1", Date.valueOf("2022-02-22"), Statuses.AVAILIBLE));
+        requestList.add(new Request(1L, 1L, "1", Date.valueOf("2022-02-02"), Statuses.CREATED.toString()));
+        requestList.add(new Request(1L, 1L, "1", Date.valueOf("2022-02-22"), Statuses.AVAILIBLE.toString()));
     }
 
     @Test
@@ -51,14 +51,14 @@ class RequestServiceTest {
 
     @Test
     void createRequest() {
-        when(requestRepository.createRequest(new Request(1L, 1L, "1", Date.valueOf("2022-02-02"), Statuses.CREATED))).thenReturn(requestList.get(0));
-        assertEquals(requestList.get(0), requestService.createRequest(new Request(1L, 1L, "1", Date.valueOf("2022-02-02"), Statuses.CREATED)));
+        when(requestRepository.createRequest(new Request(1L, 1L, "1", Date.valueOf("2022-02-02"), Statuses.CREATED.toString()))).thenReturn(requestList.get(0));
+        assertEquals(requestList.get(0), requestService.createRequest(new Request(1L, 1L, "1", Date.valueOf("2022-02-02"), Statuses.CREATED.toString())));
     }
 
     @Test
     void updateRequest() {
-        when(requestRepository.createRequest(new Request(1L, 1L, "1", Date.valueOf("2022-02-22"), Statuses.AVAILIBLE))).thenReturn(requestList.get(1));
-        assertEquals(requestList.get(1).getStatus(), requestService.createRequest(new Request(1L, 1L, "1", Date.valueOf("2022-02-22"), Statuses.AVAILIBLE)).getStatus());
+        when(requestRepository.createRequest(new Request(1L, 1L, "1", Date.valueOf("2022-02-22"), Statuses.AVAILIBLE.toString()))).thenReturn(requestList.get(1));
+        assertEquals(requestList.get(1).getStatus(), requestService.createRequest(new Request(1L, 1L, "1", Date.valueOf("2022-02-22"), Statuses.AVAILIBLE.toString())).getStatus());
 
     }
 

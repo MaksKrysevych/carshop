@@ -37,6 +37,6 @@ public class LoginController {
         user.setAccount(0);
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userService.createUser(user);
-        return "redirect:login";
+        return "redirect:/login";
     }
 }

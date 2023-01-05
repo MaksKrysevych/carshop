@@ -28,5 +28,5 @@ public class Request {
     private Date date;
     @Basic
     @Column(name = "status", nullable = false, length = 45)
-    private Statuses status;
+    private String status;
 }
