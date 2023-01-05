@@ -30,11 +30,6 @@
             <a type="button" th:href="@{/login}" class="btn btn-outline-primary me-2" th:text="#{header.login}"/>
             <a type="button" th:href="@{/sign-up}" class="btn btn-outline-primary me-2" th:text="#{header.signUp}"/>
         </div>
-        <select id="locales">
-            <option hidden value="" th:text="#{language}"></option>
-            <option value="en" th:text="#{language.eng}"></option>
-            <option value="ua" th:text="#{language.ua}"></option>
-        </select>
     </header>
 
     <div class="container">
@@ -61,20 +56,18 @@
 
 </div>
 <footer class="d-flex justify-content-center py-3">
-    <p class="text-center text-muted">© 2022 CarShop, Inc</p>
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+    </div>
+    <ul class="nav nav-pills">
+        <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
+            <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', 'ua').toUriString()}" th:text="#{language.ua}"></a>
+        </li>
+        <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
+            <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', ' ').toUriString()}" th:text="#{language.eng}"></a>
+        </li>
+    </ul>
 </footer>
 <!-- Footer -->
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#locales").change(function () {
-            const selectedOption = $('#locales').val();
-            if (selectedOption !== ''){
-                window.location.replace('/profile?lang=' + selectedOption);
-            }
-        });
-    });
-</script>
 </html>

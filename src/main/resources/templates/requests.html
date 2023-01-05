@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html lang="en"xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{page.details}"/>
+    <title th:text="#{page.requests}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -32,23 +32,6 @@
             <a type="button" th:href="@{/sign-up}" class="btn btn-outline-primary me-2" th:text="#{header.signUp}"/>
         </div>
     </header>
-</div>
-<div class="container">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <img class ="row" th:src="${gallery.photo}">
-            <span th:text="#{details.label.type}"/>: <span th:text="${car.type}"/> <br/>
-            <span th:text="#{details.label.brand}"/>: <span th:text="${car.brand}"/> <br/>
-            <span th:text="#{details.label.model}"/>: <span th:text="${car.model}"/> <br/>
-            <span th:text="#{details.label.kit}"/>: <span th:text="${car.kit}"/> <br/>
-            <span th:text="#{details.label.graduationYear}"/>: <span th:text="${car.graduationYear}"/> <br/>
-            <h4 class="front-weight-bold blue-text">
-                <a th:href="@{/book/{id}(id=${advert.advertId})}">
-                    <strong><span th:text="#{details.button.book}"></span></strong>
-                </a>
-            </h4>
-        </div>
-    </div>
 </div>
 <footer class="d-flex justify-content-center py-3">
     <div class="col-md-4 d-flex align-items-center">
