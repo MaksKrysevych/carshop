@@ -21,6 +21,9 @@ public class Advertisement {
     @Column(name = "photo_id", nullable = false)
     private Long photoId;
     @Basic
+    @Column(name = "price", nullable = false)
+    private int price;
+    @Basic
     @Column(name = "description", nullable = false, length = 500)
     private String description;
 }

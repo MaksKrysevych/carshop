@@ -33,7 +33,7 @@ public class CatalogController {
     }
 
     @GetMapping("/details/{id}")
-    public String details(@PathVariable(value = "id") Long advert_id, Model model){
+    public String details(@PathVariable("id") Long advert_id, Model model){
         model.addAttribute("advert", advertisementService.getAdvertById(advert_id));
         model.addAttribute("car", carService.getCarById(advertisementService.getAdvertById(advert_id).getCarId()));
         model.addAttribute("gallery", galleryService.getGalleryById(advertisementService.getAdvertById(advert_id).getPhotoId()));

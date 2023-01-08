@@ -31,29 +31,32 @@
             <a type="button" th:href="@{/sign-up}" class="btn btn-outline-primary me-2" th:text="#{header.signUp}"/>
         </div>
     </header>
-
     <div class="container">
-        <div class="row">
-            <strong>
-                <span th:text="#{profile.label.firstname}"/>: <span th:text="${user.name}"></span><br/>
-                <span th:text="#{profile.label.lastname}"/>: <span th:text="${user.surname}"></span><br/>
-                <span th:text="#{profile.label.phone}"/>: <span th:text="${user.phone}"></span><br/>
-                <span th:text="#{profile.label.email}"/>: <span th:text="${user.email}"></span><br/>
-                <span th:text="#{profile.label.account}"/>: <span th:text="${user.account}"></span><br/>
-                            <h4 class="front-weight-bold blue-text">
-                                <a th:href="@{/edit}">
-                                    <strong><span th:text="#{profile.button.edit}"></span></strong>
-                                </a>
-                            </h4>
-                            <h4 class="front-weight-bold blue-text">
-                                <a th:href="@{/topup}">
-                                    <strong><span th:text="#{profile.button.topup}"></span></strong>
-                                </a>
-                            </h4>
-            </strong>
-        </div>
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a th:href="@{/requests}" class="nav-link px-2 link-dark" th:text="#{profile.button.requests}"></a></li>
+        </ul>
     </div>
-
+</div>
+<div class="container">
+    <div class="row">
+        <strong>
+            <span th:text="#{profile.label.firstname}"/>: <span th:text="${user.name}"></span><br/>
+            <span th:text="#{profile.label.lastname}"/>: <span th:text="${user.surname}"></span><br/>
+            <span th:text="#{profile.label.phone}"/>: <span th:text="${user.phone}"></span><br/>
+            <span th:text="#{profile.label.email}"/>: <span th:text="${user.email}"></span><br/>
+            <span th:text="#{profile.label.account}"/>: <span th:text="${user.account}"></span><br/>
+            <h4 class="front-weight-bold blue-text">
+                <a th:href="@{/edit}">
+                    <strong><span th:text="#{profile.button.edit}"></span></strong>
+                </a>
+            </h4>
+            <h4 class="front-weight-bold blue-text">
+                <a th:href="@{/topup}">
+                    <strong><span th:text="#{profile.button.topup}"></span></strong>
+                </a>
+            </h4>
+        </strong>
+    </div>
 </div>
 <footer class="d-flex justify-content-center py-3">
     <div class="col-md-4 d-flex align-items-center">

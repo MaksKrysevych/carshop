@@ -31,8 +31,8 @@ class AdvertisementServiceTest {
     static List<Advertisement> advertisementList = new ArrayList<>();
 
     static {
-        advertisementList.add(new Advertisement(1L,1L,1L,"asfdg"));
-        advertisementList.add(new Advertisement(1L,1L,1L,"safdgfasfdg"));
+        advertisementList.add(new Advertisement(1L,1L,1L,10000,"asfdg"));
+        advertisementList.add(new Advertisement(1L,1L,1L,10000,"safdgfasfdg"));
     }
 
     @Test
@@ -49,14 +49,14 @@ class AdvertisementServiceTest {
 
     @Test
     void createAdvert() {
-        when(advertisementRepository.createAdvert(new Advertisement(1L,1L,1L,"asfdg"))).thenReturn(advertisementList.get(0));
-        assertEquals(advertisementList.get(0), advertisementService.createAdvert(new Advertisement(1L,1L,1L,"asfdg")));
+        when(advertisementRepository.createAdvert(new Advertisement(1L,1L,1L,10000,"asfdg"))).thenReturn(advertisementList.get(0));
+        assertEquals(advertisementList.get(0), advertisementService.createAdvert(new Advertisement(1L,1L,1L,10000,"asfdg")));
     }
 
     @Test
     void updateAdvert() {
-        when(advertisementRepository.updateAdvert(new Advertisement(1L,1L,1L,"safdgfasfdg"))).thenReturn(advertisementList.get(1));
-        assertEquals(advertisementList.get(1).getDescription(), advertisementService.updateAdvert(new Advertisement(1L,1L,1L,"safdgfasfdg")).getDescription());
+        when(advertisementRepository.updateAdvert(new Advertisement(1L,1L,1L,10000,"safdgfasfdg"))).thenReturn(advertisementList.get(1));
+        assertEquals(advertisementList.get(1).getDescription(), advertisementService.updateAdvert(new Advertisement(1L,1L,1L,10000,"safdgfasfdg")).getDescription());
     }
 
     @Test

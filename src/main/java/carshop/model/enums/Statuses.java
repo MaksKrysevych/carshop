@@ -1,7 +1,7 @@
 package carshop.model.enums;
 
 public enum Statuses {
-    CREATED, AVAILIBLE, PAID;
+    CREATED, AVAILIBLE, PAID, SOLD;
 
     @Override
     public String toString() {

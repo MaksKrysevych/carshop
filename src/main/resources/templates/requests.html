@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title th:text="#{page.requests}"/>
@@ -32,6 +32,76 @@
             <a type="button" th:href="@{/sign-up}" class="btn btn-outline-primary me-2" th:text="#{header.signUp}"/>
         </div>
     </header>
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a th:href="@{/requests}" class="nav-link px-2 link-dark" th:text="#{profile.button.requests}"></a></li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <th th:text="#{requests.label.requestId}"></th>
+            <th th:text="#{requests.label.advertId}"></th>
+            <th th:text="#{requests.label.email}"></th>
+            <th th:text="#{requests.label.date}"></th>
+            <th th:text="#{requests.label.status}"></th>
+            <th th:text="#{requests.label.actions}"></th>
+        </tr>
+        <tr th:each="request : ${requests}">
+            <td><span th:text="${request.requestId}"></span></td>
+            <td>
+                <a th:href="@{/details/{id}(id=${request.advertId})}">
+                    <span th:text="${request.advertId}"></span>
+                </a>
+            </td>
+            <td><span th:text="${request.email}"></span></td>
+            <td><span th:text="${request.date}"></span></td>
+            <td>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <span th:text="${request.status}"></span>
+                </div>
+                <div sec:authorize="hasRole('USER')">
+                    <span th:text="${request.date}"></span>
+                </div>
+<!--                <form th:method="POST" th:action="@{/requests}">-->
+<!--                    <select th:value="${userRequest.status}" name="status">-->
+<!--                        <span th:if="${userRequest.status == 'created'}">-->
+<!--                            <option hidden th:value="'created'" th:text="#{requests.button.created}"></option>-->
+<!--                            <option th:value="'available'" th:text="#{requests.button.available}"></option>-->
+<!--                            <option th:value="'paid'" th:text="#{requests.button.paid}"></option>-->
+<!--                            <option th:value="'finished'" th:text="#{requests.button.finished}"></option>-->
+<!--                        </span>-->
+<!--                        <span th:if="${userRequest.status == 'available'}">-->
+<!--                            <option hidden th:value="'available'" th:text="#{requests.button.available}"></option>-->
+<!--                            <option th:value="'created'" th:text="#{requests.button.created}"></option>-->
+<!--                            <option th:value="'paid'" th:text="#{requests.button.paid}"></option>-->
+<!--                            <option th:value="'finished'" th:text="#{requests.button.finished}"></option>-->
+<!--                        </span>-->
+<!--                        <span th:if="${userRequest.status == 'paid'}">-->
+<!--                            <option hidden th:value="'paid'" th:text="#{requests.button.paid}"></option>-->
+<!--                            <option th:value="'created'" th:text="#{requests.button.created}"></option>-->
+<!--                            <option th:value="'available'" th:text="#{requests.button.available}"></option>-->
+<!--                            <option th:value="'finished'" th:text="#{requests.button.finished}"></option>-->
+<!--                        </span>-->
+<!--                        <span th:if="${userRequest.status == 'finished'}">-->
+<!--                            <option hidden th:value="'finished'" th:text="#{requests.button.finished}"></option>-->
+<!--                            <option th:value="'created'" th:text="#{requests.button.created}"></option>-->
+<!--                            <option th:value="'available'" th:text="#{requests.button.available}"></option>-->
+<!--                            <option th:value="'paid'" th:text="#{requests.button.paid}"></option>-->
+<!--                        </span>-->
+
+<!--                    </select>-->
+<!--                    <button class="btn-primary" type="submit"><span th:text="#{requests.button.update}"></span></button>-->
+<!--                </form>-->
+            </td>
+            <td>
+                <a th:href="@{/delete/{id}(id=${request.requestId})}">
+                    <strong><span th:text="delete"></span></strong>
+                </a>
+            </td>
+        </tr>
+    </table>
 </div>
 <footer class="d-flex justify-content-center py-3">
     <div class="col-md-4 d-flex align-items-center">

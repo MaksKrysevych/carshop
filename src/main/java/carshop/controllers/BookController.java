@@ -22,7 +22,7 @@ public class BookController {
     }
 
     @GetMapping("/book/{id}")
-    public String book(@PathVariable(value = "id") Long advert_id, Authentication authentication){
+    public String book(@PathVariable("id") Long advert_id, Authentication authentication){
         requestService.createRequest(new Request(1L, advert_id, authentication.getName(), Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())), Statuses.CREATED.toString()));
 
         return "redirect:/requests";
