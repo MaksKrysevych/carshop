@@ -26,10 +26,8 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(user.getRole()
-                        .split(""))
-                        .map(SimpleGrantedAuthority::new)
-                        .toList();
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
+        return Arrays.asList(authority);
     }
 
     @Override

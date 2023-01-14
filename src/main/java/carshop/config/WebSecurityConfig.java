@@ -25,6 +25,7 @@ public class WebSecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/catalog/**", "/details/**" , "/login", "/login-error", "/sign-up").permitAll()
+                        .requestMatchers("/gallery/**", "/advertisements/**", "/cars/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userDetailsService)

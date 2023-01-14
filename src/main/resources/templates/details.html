@@ -42,6 +42,8 @@
             <span th:text="#{details.label.model}"/>: <span th:text="${car.model}"/> <br/>
             <span th:text="#{details.label.kit}"/>: <span th:text="${car.kit}"/> <br/>
             <span th:text="#{details.label.graduationYear}"/>: <span th:text="${car.graduationYear}"/> <br/>
+            <span th:text="#{details.label.price}"/>: <span th:text="${advert.price}"/> <br/>
+            <span th:text="#{details.label.description}"/>: <span th:text="${advert.description}"/> <br/>
             <h4 class="front-weight-bold blue-text">
                 <a th:href="@{/book/{id}(id=${advert.advertId})}">
                     <strong><span th:text="#{details.button.book}"></span></strong>
@@ -58,6 +60,7 @@
         <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
             <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', 'ua').toUriString()}" th:text="#{language.ua}"></a>
         </li>
+        &nbsp;&nbsp;
         <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
             <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', ' ').toUriString()}" th:text="#{language.eng}"></a>
         </li>

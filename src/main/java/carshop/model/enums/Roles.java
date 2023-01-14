@@ -5,6 +5,6 @@ public enum Roles {
 
     @Override
     public String toString() {
-        return super.toString().toLowerCase();
+        return super.toString();
     }
 }

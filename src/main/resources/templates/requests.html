@@ -35,6 +35,9 @@
     <div class="container">
         <ul class="nav nav-pills">
             <li class="nav-item"><a th:href="@{/requests}" class="nav-link px-2 link-dark" th:text="#{profile.button.requests}"></a></li>
+            <li class="nav-item"><a th:href="@{/advertisements}" class="nav-link px-2 link-dark" th:text="#{profile.button.advertisement}"></a></li>
+            <li class="nav-item"><a th:href="@{/gallery}" class="nav-link px-2 link-dark" th:text="#{profile.button.gallery}"></a></li>
+            <li class="nav-item"><a th:href="@{/cars}" class="nav-link px-2 link-dark" th:text="#{profile.button.cars}"></a></li>
         </ul>
     </div>
 </div>
@@ -58,46 +61,20 @@
             <td><span th:text="${request.email}"></span></td>
             <td><span th:text="${request.date}"></span></td>
             <td>
-                <div sec:authorize="hasRole('ADMIN')">
+                <div sec:authorize="hasAuthority('ADMIN')">
                     <span th:text="${request.status}"></span>
                 </div>
-                <div sec:authorize="hasRole('USER')">
-                    <span th:text="${request.date}"></span>
+                <div sec:authorize="hasAuthority('USER')">
+                    <span th:text="${request.status}"></span>
                 </div>
-<!--                <form th:method="POST" th:action="@{/requests}">-->
-<!--                    <select th:value="${userRequest.status}" name="status">-->
-<!--                        <span th:if="${userRequest.status == 'created'}">-->
-<!--                            <option hidden th:value="'created'" th:text="#{requests.button.created}"></option>-->
-<!--                            <option th:value="'available'" th:text="#{requests.button.available}"></option>-->
-<!--                            <option th:value="'paid'" th:text="#{requests.button.paid}"></option>-->
-<!--                            <option th:value="'finished'" th:text="#{requests.button.finished}"></option>-->
-<!--                        </span>-->
-<!--                        <span th:if="${userRequest.status == 'available'}">-->
-<!--                            <option hidden th:value="'available'" th:text="#{requests.button.available}"></option>-->
-<!--                            <option th:value="'created'" th:text="#{requests.button.created}"></option>-->
-<!--                            <option th:value="'paid'" th:text="#{requests.button.paid}"></option>-->
-<!--                            <option th:value="'finished'" th:text="#{requests.button.finished}"></option>-->
-<!--                        </span>-->
-<!--                        <span th:if="${userRequest.status == 'paid'}">-->
-<!--                            <option hidden th:value="'paid'" th:text="#{requests.button.paid}"></option>-->
-<!--                            <option th:value="'created'" th:text="#{requests.button.created}"></option>-->
-<!--                            <option th:value="'available'" th:text="#{requests.button.available}"></option>-->
-<!--                            <option th:value="'finished'" th:text="#{requests.button.finished}"></option>-->
-<!--                        </span>-->
-<!--                        <span th:if="${userRequest.status == 'finished'}">-->
-<!--                            <option hidden th:value="'finished'" th:text="#{requests.button.finished}"></option>-->
-<!--                            <option th:value="'created'" th:text="#{requests.button.created}"></option>-->
-<!--                            <option th:value="'available'" th:text="#{requests.button.available}"></option>-->
-<!--                            <option th:value="'paid'" th:text="#{requests.button.paid}"></option>-->
-<!--                        </span>-->
 
-<!--                    </select>-->
-<!--                    <button class="btn-primary" type="submit"><span th:text="#{requests.button.update}"></span></button>-->
-<!--                </form>-->
             </td>
             <td>
-                <a th:href="@{/delete/{id}(id=${request.requestId})}">
-                    <strong><span th:text="delete"></span></strong>
+                <a th:href="@{/request/delete/{id}(id=${request.requestId})}">
+                    <strong><span th:text="#{requests.button.delete}"></span></strong>
+                </a>
+                <a th:href="@{/request/reserve/{id}(id=${request.requestId})}">
+                    <strong><span th:text="#{requests.button.reserve}"></span></strong>
                 </a>
             </td>
         </tr>
@@ -111,6 +88,7 @@
         <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
             <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', 'ua').toUriString()}" th:text="#{language.ua}"></a>
         </li>
+        &nbsp;&nbsp;
         <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
             <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', ' ').toUriString()}" th:text="#{language.eng}"></a>
         </li>

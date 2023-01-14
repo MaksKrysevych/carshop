@@ -1,10 +1,10 @@
 package carshop.model.enums;
 
 public enum Statuses {
-    CREATED, AVAILIBLE, PAID, SOLD;
+    CREATED, CANCELED, AVAILIBLE, BOOKED, SOLD;
 
     @Override
     public String toString() {
-        return super.toString().toLowerCase();
+        return super.toString();
     }
 }

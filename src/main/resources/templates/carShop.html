@@ -44,6 +44,7 @@
         <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
             <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', 'ua').toUriString()}" th:text="#{language.ua}"></a>
         </li>
+        &nbsp;&nbsp;
         <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
             <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', ' ').toUriString()}" th:text="#{language.eng}"></a>
         </li>

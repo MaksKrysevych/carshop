@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
+<body>
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <a href="" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
@@ -34,6 +35,9 @@
     <div class="container">
         <ul class="nav nav-pills">
             <li class="nav-item"><a th:href="@{/requests}" class="nav-link px-2 link-dark" th:text="#{profile.button.requests}"></a></li>
+            <li class="nav-item"><a th:href="@{/advertisements}" class="nav-link px-2 link-dark" th:text="#{profile.button.advertisement}"></a></li>
+            <li class="nav-item"><a th:href="@{/gallery}" class="nav-link px-2 link-dark" th:text="#{profile.button.gallery}"></a></li>
+            <li class="nav-item"><a th:href="@{/cars}" class="nav-link px-2 link-dark" th:text="#{profile.button.cars}"></a></li>
         </ul>
     </div>
 </div>
@@ -66,6 +70,7 @@
         <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
             <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', 'ua').toUriString()}" th:text="#{language.ua}"></a>
         </li>
+        &nbsp;&nbsp;
         <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
             <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', ' ').toUriString()}" th:text="#{language.eng}"></a>
         </li>
