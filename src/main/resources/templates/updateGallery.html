@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{page.details}"/>
+    <title th:text="#{page.gallery}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -42,44 +42,36 @@
             <a type="button" th:href="@{/sign-up}" class="btn btn-outline-primary me-2" th:text="#{header.signUp}"/>
         </div>
     </header>
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a th:href="@{/requests}" class="nav-link px-2 link-dark"
+                                    th:text="#{profile.button.requests}"></a></li>
+            <li class="nav-item"><a th:href="@{/advertisements}" class="nav-link px-2 link-dark"
+                                    th:text="#{profile.button.advertisement}"></a></li>
+            <li class="nav-item"><a th:href="@{/gallery}" class="nav-link px-2 link-dark"
+                                    th:text="#{profile.button.gallery}"></a></li>
+            <li class="nav-item"><a th:href="@{/cars}" class="nav-link px-2 link-dark"
+                                    th:text="#{profile.button.cars}"></a></li>
+        </ul>
+    </div>
 </div>
 <div class="container">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <img class="row" th:src="${gallery.photo}">
-            <span th:text="#{details.label.type}"/>: <span th:text="${car.type}"/> <br/>
-            <span th:text="#{details.label.brand}"/>: <span th:text="${car.brand}"/> <br/>
-            <span th:text="#{details.label.model}"/>: <span th:text="${car.model}"/> <br/>
-            <span th:text="#{details.label.kit}"/>: <span th:text="${car.kit}"/> <br/>
-            <span th:text="#{details.label.graduationYear}"/>: <span th:text="${car.graduationYear}"/> <br/>
-            <span th:text="#{details.label.price}"/>: <span th:text="${advert.price}"/> <br/>
-            <span th:text="#{details.label.description}"/>: <span th:text="${advert.description}"/> <br/>
-            <h4 class="front-weight-bold blue-text">
-                <a th:href="@{/book/{id}(id=${advert.advertId})}">
-                    <strong><span th:text="#{details.button.book}"></span></strong>
-                </a>
-            </h4>
-        </div>
+    <div class="row">
+        <form th:action="@{/photo/update}" th:method="POST" th:object="${photo}">
+            <div class="form-group">
+                <input name="photoId" type="hidden" th:flied="*{photoId}" th:value="*{photoId}" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label><span th:text="#{gallery.label.carId}"/></label>
+                <input name="carId" type="text" th:flied="*{carId}" th:value="*{carId}" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label><span th:text="#{gallery.label.photo}"/></label>
+                <input name="photo" type="text" th:flied="*{photo}" th:value="*{photo}" class="form-control"/>
+            </div>
+            <button class="btn-primary" type="submit"><span th:text="#{gallery.button.update}"/></button>
+        </form>
     </div>
 </div>
-<footer class="d-flex justify-content-center py-3">
-    <div class="col-md-4 d-flex align-items-center">
-        <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
-    </div>
-    <ul class="nav nav-pills">
-        <li class="nav-item"
-            th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
-            <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', 'ua').toUriString()}"
-               th:text="#{language.ua}"></a>
-        </li>
-        &nbsp;&nbsp;
-        <li class="nav-item"
-            th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
-            <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', ' ').toUriString()}"
-               th:text="#{language.eng}"></a>
-        </li>
-    </ul>
-</footer>
-<!-- Footer -->
 </body>
 </html>

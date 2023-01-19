@@ -1,23 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title th:text="#{page.signUp}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <a href="" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
         </a>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a th:href="@{/}"  class="nav-link px-2 link-dark" th:text="#{header.home}"/></li>
-            <li><a th:href="@{/catalog}"  class="nav-link px-2 link-dark" th:text="#{header.catalog}"/></li>
+            <li><a th:href="@{/}" class="nav-link px-2 link-dark" th:text="#{header.home}"/></li>
+            <li><a th:href="@{/catalog}" class="nav-link px-2 link-dark" th:text="#{header.catalog}"/></li>
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/profile}" class="nav-link px-2 link-dark" th:text="#{header.profile}"/>
             </li>
@@ -47,13 +57,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="form_login"><span th:text="#{signUp.label.email}"/></label>
-                                <input id="form_login" type="email" th:field="*{email}" class="form-control" required="required"  th:placeholder="#{signUp.placeholder.email}">
+                                <input id="form_login" type="email" th:field="*{email}" class="form-control"
+                                       required="required" th:placeholder="#{signUp.placeholder.email}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="form_password"><span th:text="#{signUp.label.password}"/></label>
-                                <input id="form_password" type="password" th:field="*{password}" class="form-control" required="required">
+                                <input id="form_password" type="password" th:field="*{password}" class="form-control"
+                                       required="required">
                             </div>
                         </div>
                     </div>
@@ -62,13 +74,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="form_name"><span th:text="#{signUp.label.name}"/></label>
-                                <input id="form_name" type="text" th:field="*{name}" class="form-control" required="required" th:placeholder="#{signUp.placeholder.name}">
+                                <input id="form_name" type="text" th:field="*{name}" class="form-control"
+                                       required="required" th:placeholder="#{signUp.placeholder.name}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="form_lastname"><span th:text="#{signUp.label.surname}"/></label>
-                                <input id="form_lastname" type="text" th:field="*{surname}" class="form-control" required="required" th:placeholder="#{signUp.placeholder.surname}">
+                                <input id="form_lastname" type="text" th:field="*{surname}" class="form-control"
+                                       required="required" th:placeholder="#{signUp.placeholder.surname}">
                             </div>
                         </div>
                     </div>
@@ -78,7 +92,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="form_phone"><span th:text="#{signUp.label.phone}"/></label>
-                                <input id="form_phone" type="tel" th:field="${user.phone}" class="form-control" th:placeholder="#{signUp.placeholder.phone}">
+                                <input id="form_phone" type="tel" th:field="${user.phone}" class="form-control"
+                                       th:placeholder="#{signUp.placeholder.phone}">
                             </div>
                         </div>
                     </div>
@@ -106,12 +121,16 @@
         <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
     </div>
     <ul class="nav nav-pills">
-        <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
-            <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', 'ua').toUriString()}" th:text="#{language.ua}"></a>
+        <li class="nav-item"
+            th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
+            <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', 'ua').toUriString()}"
+               th:text="#{language.ua}"></a>
         </li>
         &nbsp;&nbsp;
-        <li class="nav-item" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
-            <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', ' ').toUriString()}" th:text="#{language.eng}"></a>
+        <li class="nav-item"
+            th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
+            <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('lang', ' ').toUriString()}"
+               th:text="#{language.eng}"></a>
         </li>
     </ul>
 </footer>

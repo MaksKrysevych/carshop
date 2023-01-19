@@ -3,7 +3,6 @@ package carshop.controllers;
 import carshop.model.entity.Request;
 import carshop.model.enums.Statuses;
 import carshop.service.RequestService;
-import carshop.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class RequestsController {
     private final RequestService requestService;
-    private final StorageService storageService;
 
     @Autowired
-    public RequestsController(RequestService requestService, StorageService storageService) {
+    public RequestsController(RequestService requestService) {
         this.requestService = requestService;
-        this.storageService = storageService;
     }
 
     @GetMapping("/requests")
@@ -43,7 +40,7 @@ public class RequestsController {
         return "redirect:/requests";
     }
 
-    @GetMapping("/reserve/{id}")
+    @GetMapping("/request/reserve/{id}")
     public String bookRequestById(@PathVariable Long id){
         Request request = requestService.getRequestById(id);
         request.setStatus(Statuses.BOOKED.toString());
