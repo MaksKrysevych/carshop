@@ -46,12 +46,21 @@
         <ul class="nav nav-pills">
             <li class="nav-item"><a th:href="@{/requests}" class="nav-link px-2 link-dark"
                                     th:text="#{profile.button.requests}"></a></li>
-            <li class="nav-item"><a th:href="@{/advertisements}" class="nav-link px-2 link-dark"
-                                    th:text="#{profile.button.advertisement}"></a></li>
-            <li class="nav-item"><a th:href="@{/gallery}" class="nav-link px-2 link-dark"
-                                    th:text="#{profile.button.gallery}"></a></li>
-            <li class="nav-item"><a th:href="@{/cars}" class="nav-link px-2 link-dark"
-                                    th:text="#{profile.button.cars}"></a></li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/advertisements}"
+                                                                                        class="nav-link px-2 link-dark"
+                                                                                        th:text="#{profile.button.advertisement}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/gallery}"
+                                                                                        class="nav-link px-2 link-dark"
+                                                                                        th:text="#{profile.button.gallery}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/cars}"
+                                                                                        class="nav-link px-2 link-dark"
+                                                                                        th:text="#{profile.button.cars}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/users}"
+                                                                          class="nav-link px-2 link-dark"
+                                                                          th:text="#{profile.button.users}"></a></li>
         </ul>
     </div>
 </div>
@@ -78,13 +87,35 @@
                 <div sec:authorize="hasAuthority('ADMIN')">
                     <div th:each="storage : ${storages}">
                         <div th:if="${storage.advertId} == ${request.advertId}">
-                            <span th:text="${storage.status}"></span>
+                            <form th:method="POST" th:action="@{/requests}">
+                                <select th:value="${storage.status}" name="status">
+                                    <span th:if="${storage.status == 'AVAILABLE'}">
+                                        <option hidden th:value="'AVAILABLE'" th:text="#{requests.status.available}"></option>
+                                        <option th:value="'BOOKED'" th:text="#{requests.status.booked}"></option>
+                                        <option th:value="'SOLD'" th:text="#{requests.status.sold}"></option>
+                                    </span>
+                                    <span th:if="${storage.status == 'BOOKED'}">
+                                        <option hidden th:value="'BOOKED'" th:text="#{requests.status.booked}"></option>
+                                        <option th:value="'AVAILABLE'" th:text="#{requests.status.available}"></option>
+                                        <option th:value="'SOLD'" th:text="#{requests.status.sold}"></option>
+                                    </span>
+                                    <span th:if="${storage.status == 'SOLD'}">
+                                        <option hidden th:value="'SOLD'" th:text="#{requests.status.sold}"></option>
+                                        <option th:value="'BOOKED'" th:text="#{requests.status.booked}"></option>
+                                        <option th:value="'AVAILABLE'" th:text="#{requests.status.available}"></option>
+                                    </span>
+                                </select>
+
+                                <input name="advertId" type="hidden" th:value="${storage.advertId}">
+
+                                <button class="btn-primary" type="submit"><span th:text="#{requests.button.update}"></span></button>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <div sec:authorize="hasAuthority('USER')">
                     <div th:each="storage : ${storages}">
-                        <div th:if="${storage.caadvertIdrId} == ${request.advertId}">
+                        <div th:if="${storage.advertId} == ${request.advertId}">
                             <span th:text="${storage.status}"></span>
                         </div>
                     </div>
@@ -95,9 +126,11 @@
                 <a th:href="@{/request/delete/{id}(id=${request.requestId})}">
                     <strong><span th:text="#{requests.button.delete}"></span></strong>
                 </a>
-                <a th:href="@{/request/reserve/{id}(id=${request.requestId})}">
-                    <strong><span th:text="#{requests.button.reserve}"></span></strong>
-                </a>
+                <div sec:authorize="hasAuthority('USER')">
+                    <a th:href="@{/request/reserve/{id}(id=${request.requestId})}">
+                        <strong><span th:text="#{requests.button.reserve}"></span></strong>
+                    </a>
+                </div>
             </td>
         </tr>
     </table>

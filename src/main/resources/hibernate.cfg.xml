@@ -17,5 +17,6 @@
         <mapping class="carshop.model.entity.Gallery"/>
         <mapping class="carshop.model.entity.Request"/>
         <mapping class="carshop.model.entity.Car"/>
+        <mapping class="carshop.model.entity.Storage"/>
     </session-factory>
 </hibernate-configuration>

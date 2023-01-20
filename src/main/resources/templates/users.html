@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{page.advertisement}"/>
+    <title th:text="#{page.users}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -67,63 +67,34 @@
 <div class="container">
     <table class="table table-bordered">
         <tr>
-            <th th:text="#{advertisement.label.advertId}"></th>
-            <th th:text="#{advertisement.label.carId}"></th>
-            <th th:text="#{advertisement.label.photoId}"></th>
-            <th th:text="#{advertisement.label.price}"></th>
-            <th th:text="#{advertisement.label.description}"></th>
-            <th th:text="#{advertisement.label.actions}"></th>
+            <th th:text="#{user.button.email}"></th>
+            <th th:text="#{user.button.name}"></th>
+            <th th:text="#{user.button.surname}"></th>
+            <th th:text="#{user.button.role}"></th>
         </tr>
-        <tr th:each="advert : ${adverts}">
-            <td><span th:text="${advert.advertId}"></span></td>
-            <td><span th:text="${advert.carId}"></span></td>
-            <td><span th:text="${advert.photoId}"></span></td>
-            <td><span th:text="${advert.price}"></span></td>
-            <td><span th:text="${advert.description}"></span></td>
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.email}"></span></td>
+            <td><span th:text="${user.name}"></span></td>
+            <td><span th:text="${user.surname}"></span></td>
             <td>
-                <a th:href="@{/advertisements/update/{id}(id=${advert.advertId})}">
-                    <strong><span th:text="#{advertisement.button.update}"></span></strong>
-                </a>
-                <a th:href="@{/advertisements/delete/{id}(id=${advert.advertId})}">
-                    <strong><span th:text="#{advertisement.button.delete}"></span></strong>
-                </a>
+                <form th:action="@{/users}" th:method="POST">
+                    <select th:value="${user.role}" name="role">
+                        <span th:if="${user.role == 'USER'}">
+                            <option hidden th:value="'USER'" th:text="#{user.role.user}"></option>
+                            <option th:value="'MANAGER'" th:text="#{user.role.manager}"></option>
+                        </span>
+                        <span th:if="${user.role == 'MANAGER'}">
+                            <option hidden th:value="'MANAGER'" th:text="#{user.role.manager}"></option>
+                            <option th:value="'USER'" th:text="#{user.role.user}"></option>
+                        </span>
+                        <span th:if="${user.role == 'ADMIN'}">
+                            <option selected hidden th:value="'ADMIN'" th:text="#{user.role.admin}"></option>
+                        </span>
+                    </select>
+                </form>
             </td>
         </tr>
     </table>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAdvert">
-        <span th:text="#{advertisement.button.create}"/>
-    </button>
-</div>
-<!-- Modal create -->
-<div class="modal fade" id="createAdvert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form th:action="@{/advertisement}" th:method="POST" th:object="${advertisement}">
-                    <div class="form-group">
-                        <label><span th:text="#{advertisement.label.carId}"/></label>
-                        <input name="carId" type="text" th:flied="*{carId}" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label><span th:text="#{advertisement.label.photoId}"/></label>
-                        <input name="photoId" type="text" th:flied="*{photoId}" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label><span th:text="#{advertisement.label.price}"/></label>
-                        <input name="price" type="text" th:flied="*{price}" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label><span th:text="#{advertisement.label.description}"/></label>
-                        <input name="description" type="text" th:flied="*{description}" class="form-control"/>
-                    </div>
-                    <button class="btn-primary" type="submit"><span th:text="#{advertisement.button.create}"/></button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span
-                            th:text="#{advertisement.button.close}"/></button>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
 <footer class="d-flex justify-content-center py-3">
     <div class="col-md-4 d-flex align-items-center">

@@ -46,12 +46,21 @@
         <ul class="nav nav-pills">
             <li class="nav-item"><a th:href="@{/requests}" class="nav-link px-2 link-dark"
                                     th:text="#{profile.button.requests}"></a></li>
-            <li class="nav-item"><a th:href="@{/advertisements}" class="nav-link px-2 link-dark"
-                                    th:text="#{profile.button.advertisement}"></a></li>
-            <li class="nav-item"><a th:href="@{/gallery}" class="nav-link px-2 link-dark"
-                                    th:text="#{profile.button.gallery}"></a></li>
-            <li class="nav-item"><a th:href="@{/cars}" class="nav-link px-2 link-dark"
-                                    th:text="#{profile.button.cars}"></a></li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/advertisements}"
+                                                                                        class="nav-link px-2 link-dark"
+                                                                                        th:text="#{profile.button.advertisement}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/gallery}"
+                                                                                        class="nav-link px-2 link-dark"
+                                                                                        th:text="#{profile.button.gallery}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/cars}"
+                                                                                        class="nav-link px-2 link-dark"
+                                                                                        th:text="#{profile.button.cars}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/users}"
+                                                                          class="nav-link px-2 link-dark"
+                                                                          th:text="#{profile.button.users}"></a></li>
         </ul>
     </div>
 </div>

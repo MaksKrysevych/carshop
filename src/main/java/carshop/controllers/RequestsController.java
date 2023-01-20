@@ -1,8 +1,10 @@
 package carshop.controllers;
 
 import carshop.model.entity.Request;
+import carshop.model.entity.Storage;
 import carshop.model.enums.Statuses;
 import carshop.service.RequestService;
+import carshop.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,26 +13,27 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class RequestsController {
     private final RequestService requestService;
+    private final StorageService storageService;
 
     @Autowired
-    public RequestsController(RequestService requestService) {
+    public RequestsController(RequestService requestService, StorageService storageService) {
         this.requestService = requestService;
+        this.storageService = storageService;
     }
 
     @GetMapping("/requests")
     public String getRequests(Model model){
         model.addAttribute("requests", requestService.getAllRequests());
+        model.addAttribute("storages", storageService.getAllStorageCars());
 
         return "requests";
     }
 
     @PostMapping("/requests")
-    public String changeStatusOfRequest(@ModelAttribute Request updatedRequest){
-        Request update = requestService.getRequestById(updatedRequest.getRequestId());
-        update.setStatus(updatedRequest.getStatus());
-        requestService.updateRequest(update);
+    public String changeStatusOfRequest(@ModelAttribute Storage updatedStatus){
+        storageService.updateStorageCar(updatedStatus);
 
-        return "requests";
+        return "redirect:/requests";
     }
 
     @GetMapping("/request/delete/{id}")
