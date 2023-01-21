@@ -5,13 +5,15 @@ import carshop.model.entity.Storage;
 import java.util.List;
 
 public interface StorageService {
-    List<Storage> getAllStorageCars();
+    List<Storage> getAllStorageAdverts();
 
-    Storage getStorageCarById(Long id);
+    Storage getStorageAdvertById(Long id);
 
-    Storage createStorageCar(Storage storage);
+    Storage createStorageAdvert(Storage storage);
 
-    Storage updateStorageCar(Storage storage);
+    Storage updateStorageAdvert(Storage storage);
 
-    void deleteStorageCarById(Long id);
+    Storage reserveCarById(Long id);
+
+    void deleteStorageAdvertById(Long id);
 }

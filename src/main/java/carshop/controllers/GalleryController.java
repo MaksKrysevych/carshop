@@ -1,6 +1,5 @@
 package carshop.controllers;
 
-import carshop.model.entity.Advertisement;
 import carshop.model.entity.Gallery;
 import carshop.service.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,6 +2,7 @@ package carshop.controllers;
 
 import carshop.model.entity.Advertisement;
 import carshop.service.AdvertisementService;
+import carshop.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AdvertisementController {
     private final AdvertisementService advertisementService;
+    private final StorageService storageService;
 
     @Autowired
-    public AdvertisementController(AdvertisementService advertisementService) {
+    public AdvertisementController(AdvertisementService advertisementService, StorageService storageService) {
         this.advertisementService = advertisementService;
+        this.storageService = storageService;
     }
 
     @GetMapping("/advertisements")
@@ -51,6 +54,7 @@ public class AdvertisementController {
     @GetMapping("/advertisements/delete/{id}")
     public String deleteAdvertById(@PathVariable Long id){
         advertisementService.deleteAdvertById(id);
+        storageService.deleteStorageAdvertById(id);
 
         return "redirect:/advertisements";
     }

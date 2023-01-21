@@ -1,8 +1,6 @@
 package carshop.controllers;
 
-import carshop.model.entity.Request;
 import carshop.model.entity.Storage;
-import carshop.model.enums.Statuses;
 import carshop.service.RequestService;
 import carshop.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +22,14 @@ public class RequestsController {
     @GetMapping("/requests")
     public String getRequests(Model model){
         model.addAttribute("requests", requestService.getAllRequests());
-        model.addAttribute("storages", storageService.getAllStorageCars());
+        model.addAttribute("storages", storageService.getAllStorageAdverts());
 
         return "requests";
     }
 
     @PostMapping("/requests")
     public String changeStatusOfRequest(@ModelAttribute Storage updatedStatus){
-        storageService.updateStorageCar(updatedStatus);
+        storageService.updateStorageAdvert(updatedStatus);
 
         return "redirect:/requests";
     }
@@ -44,10 +42,8 @@ public class RequestsController {
     }
 
     @GetMapping("/request/reserve/{id}")
-    public String bookRequestById(@PathVariable Long id){
-        Request request = requestService.getRequestById(id);
-        request.setStatus(Statuses.BOOKED.toString());
-        requestService.updateRequest(request);
+    public String reserveCarById(@PathVariable Long id){
+        storageService.reserveCarById(id);
 
         return "redirect:/requests";
     }

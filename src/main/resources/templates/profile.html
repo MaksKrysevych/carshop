@@ -102,7 +102,7 @@
                     </div>
                     <div class="form-group">
                         <label><span th:text="#{profile.label.phone}"/></label>
-                        <input name="phone" type="text" th:flied="${user.phone}" th:value="${user.phone}" class="form-control"/>
+                        <input name="phone" type="text" th:flied="${user.phone}" th:value="${user.phone}" class="form-control" maxlength="10"/>
                     </div>
                     <button class="btn-primary" type="submit"><span th:text="#{profile.button.edit}"/></button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -121,7 +121,7 @@
                 <form th:action="@{/profile/top-up}" th:method="POST">
                     <div class="form-group">
                         <label><span th:text="#{profile.label.money}"/></label>
-                        <input name="account" type="text" th:flied="${user.account}" th:value="${user.account}" class="form-control"/>
+                        <input name="account" type="text" th:flied="${user.account}" class="form-control"/>
                     </div>
                     <button class="btn-primary" type="submit"><span th:text="#{profile.button.topup}"/></button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">

@@ -27,8 +27,8 @@ public class User {
     @Column(name = "role", nullable = false, length = 45)
     private String role;
     @Basic
-    @Column(name = "phone", nullable = false)
-    private int phone;
+    @Column(name = "phone", nullable = false, length = 10)
+    private String phone;
     @Basic
     @Column(name = "account", nullable = false)
     private Integer account;

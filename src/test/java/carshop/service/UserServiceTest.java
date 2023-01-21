@@ -31,8 +31,8 @@ class UserServiceTest {
     static List<User> userList = new ArrayList<>();
 
     static {
-        userList.add(new User("adscv", "sdV", "SDVV", "SDVV", Roles.USER.toString(), 4356576, 0));
-        userList.add(new User("adscv", "sdV", "SDVV", "SDVV", Roles.ADMIN.toString(), 4356576, 0));
+        userList.add(new User("adscv", "sdV", "SDVV", "SDVV", Roles.USER.toString(), "4356576", 0));
+        userList.add(new User("adscv", "sdV", "SDVV", "SDVV", Roles.ADMIN.toString(), "4356576", 0));
     }
 
     @Test
@@ -49,14 +49,14 @@ class UserServiceTest {
 
     @Test
     void createUser() {
-        when(userRepository.createUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.USER.toString(), 4356576, 0))).thenReturn(userList.get(0));
-        assertEquals(userList.get(0), userService.createUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.USER.toString(), 4356576, 0)));
+        when(userRepository.createUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.USER.toString(), "4356576", 0))).thenReturn(userList.get(0));
+        assertEquals(userList.get(0), userService.createUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.USER.toString(), "4356576", 0)));
     }
 
     @Test
     void updateUser() {
-        when(userRepository.updateUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.ADMIN.toString(), 4356576, 0))).thenReturn(userList.get(1));
-        assertEquals(userList.get(1).getRole(), userService.updateUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.ADMIN.toString(), 4356576, 0)).getRole());
+        when(userRepository.updateUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.ADMIN.toString(), "4356576", 0))).thenReturn(userList.get(1));
+        assertEquals(userList.get(1).getRole(), userService.updateUser(new User("adscv", "sdV", "SDVV", "SDVV", Roles.ADMIN.toString(), "4356576", 0)).getRole());
     }
 
     @Test

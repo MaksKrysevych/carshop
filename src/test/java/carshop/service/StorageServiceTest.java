@@ -38,31 +38,31 @@ class StorageServiceTest {
     @Test
     void getAllStorageCars() {
         when(storageRepository.getAllStorages()).thenReturn(storageList);
-        assertEquals(2, storageService.getAllStorageCars().size());
+        assertEquals(2, storageService.getAllStorageAdverts().size());
     }
 
     @Test
     void getStorageCarById() {
         when(storageRepository.getStorageById(1L)).thenReturn(storageList.get(0));
-        assertEquals(storageList.get(0), storageService.getStorageCarById(1L));
+        assertEquals(storageList.get(0), storageService.getStorageAdvertById(1L));
     }
 
     @Test
     void createStorageCar() {
         when(storageRepository.createStorage(new Storage(1L, Statuses.AVAILIBLE.toString()))).thenReturn(storageList.get(0));
-        assertEquals(storageList.get(0), storageService.createStorageCar(new Storage(1L, Statuses.AVAILIBLE.toString())));
+        assertEquals(storageList.get(0), storageService.createStorageAdvert(new Storage(1L, Statuses.AVAILIBLE.toString())));
     }
 
     @Test
     void updateStorageCar() {
         when(storageRepository.createStorage(new Storage(1L, Statuses.BOOKED.toString()))).thenReturn(storageList.get(1));
-        assertEquals(storageList.get(1).getStatus(), storageService.createStorageCar(new Storage(1L, Statuses.BOOKED.toString())).getStatus());
+        assertEquals(storageList.get(1).getStatus(), storageService.createStorageAdvert(new Storage(1L, Statuses.BOOKED.toString())).getStatus());
     }
 
     @Test
     void deleteStorageCarById() {
         storageRepository.deleteStorageById(1L);
-        assertEquals(0, storageService.getAllStorageCars().size());
+        assertEquals(0, storageService.getAllStorageAdverts().size());
         verify(storageRepository).deleteStorageById(1L);
     }
 }

@@ -26,7 +26,4 @@ public class Request {
     @Basic
     @Column(name = "date", nullable = false)
     private Date date;
-    @Basic
-    @Column(name = "status", nullable = false, length = 45)
-    private String status;
 }

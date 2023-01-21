@@ -1,6 +1,7 @@
 package carshop.service;
 
 import carshop.model.entity.Storage;
+import carshop.model.enums.Statuses;
 import carshop.repository.StorageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,27 +19,35 @@ public class StorageServiceImpl implements StorageService{
     }
 
     @Override
-    public List<Storage> getAllStorageCars() {
+    public List<Storage> getAllStorageAdverts() {
         return storageRepository.getAllStorages();
     }
 
     @Override
-    public Storage getStorageCarById(Long id) {
+    public Storage getStorageAdvertById(Long id) {
         return storageRepository.getStorageById(id);
     }
 
     @Override
-    public Storage createStorageCar(Storage storage) {
+    public Storage createStorageAdvert(Storage storage) {
         return storageRepository.createStorage(storage);
     }
 
     @Override
-    public Storage updateStorageCar(Storage storage) {
+    public Storage updateStorageAdvert(Storage storage) {
         return storageRepository.updateStorage(storage);
     }
 
     @Override
-    public void deleteStorageCarById(Long id) {
+    public Storage reserveCarById(Long id) {
+        Storage advertStatus = storageRepository.getStorageById(id);
+        advertStatus.setStatus(Statuses.BOOKED.toString());
+
+        return storageRepository.updateStorage(advertStatus);
+    }
+
+    @Override
+    public void deleteStorageAdvertById(Long id) {
         storageRepository.deleteStorageById(id);
     }
 }

@@ -1,6 +1,5 @@
 package carshop.controllers;
 
-import carshop.model.entity.Advertisement;
 import carshop.model.entity.Car;
 import carshop.service.CarService;
 import org.springframework.stereotype.Controller;

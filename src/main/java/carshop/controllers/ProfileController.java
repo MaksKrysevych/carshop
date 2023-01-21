@@ -22,26 +22,20 @@ public class ProfileController {
     @GetMapping("/profile")
     public String profile(Authentication authentication, Model model){
         model.addAttribute("user", userService.getUserByEmail(authentication.getName()));
+
         return "profile";
     }
 
     @PostMapping("/profile/edit")
-    public String edit(@ModelAttribute User user, Authentication authentication){
-        User user1 = userService.getUserByEmail(authentication.getName());
-        user1.setName(user.getName());
-        user1.setSurname(user.getSurname());
-        user1.setPhone(user.getPhone());
-
-        userService.updateUser(user1);
+    public String edit(@ModelAttribute User editedUser, Authentication authentication){
+        userService.editUser(editedUser, authentication);
 
         return "redirect:/profile";
     }
 
     @PostMapping("/profile/top-up")
     public String topUp(@ModelAttribute User user, Authentication authentication){
-        User user1 = userService.getUserByEmail(authentication.getName());
-        user1.setAccount(user.getAccount() + user1.getAccount());
-        userService.updateUser(user1);
+        userService.topUp(user, authentication);
 
         return "redirect:/profile";
     }
