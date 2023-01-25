@@ -51,6 +51,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User updateRoleUsers(User user) {
+        User updatedUser = userRepository.getUserByEmail(user.getEmail());
+        updatedUser.setRole(user.getRole());
+
+        return userRepository.updateUser(updatedUser);
+    }
+
+    @Override
     public User editUser(User editedUser, Authentication authentication) {
         User oldUser = userRepository.getUserByEmail(authentication.getName());
         oldUser.setName(editedUser.getName());

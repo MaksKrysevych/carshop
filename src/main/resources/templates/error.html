@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{page.login}"/>
+    <title th:text="#{page.error}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -43,17 +43,9 @@
         </div>
     </header>
 
-    <div class="text-center">
-        <form th:action="@{/login}" method="post">
-            <div><label> <span th:text="#{login.label.email}"/>: <input type="text" name="username"/> </label></div>
-            <div><label> <span th:text="#{login.label.password}"/>: <input type="password" name="password"/> </label>
-            </div>
-            <div th:if="${param.error}">
-                <span th:text="#{error.login}"/>
-            </div>
-            <div class="text-center"><input type="submit" th:value="#{login.button.submit}"/></div>
-        </form>
-    </div>
+    <h1 th:text="#{error.unknownError1}"></h1>
+    <h1 th:text="#{error.unknownError2}"></h1>
+
 </div>
 <footer class="d-flex justify-content-center py-3">
     <div class="col-md-4 d-flex align-items-center">

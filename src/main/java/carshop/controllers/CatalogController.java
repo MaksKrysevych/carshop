@@ -25,6 +25,7 @@ public class CatalogController {
 
     @GetMapping("/catalog")
     public String catalog(Model model){
+
         model.addAttribute("adverts", advertisementService.getAllAdverts());
         model.addAttribute("cars", carService.getAllCars());
         model.addAttribute("galleries", galleryService.getAllGalleries());

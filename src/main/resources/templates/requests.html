@@ -84,7 +84,7 @@
             <td><span th:text="${request.email}"></span></td>
             <td><span th:text="${request.date}"></span></td>
             <td>
-                <div sec:authorize="hasAuthority('ADMIN')">
+                <div sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
                     <div th:each="storage : ${storages}">
                         <div th:if="${storage.advertId} == ${request.advertId}">
                             <form th:method="POST" th:action="@{/requests}">

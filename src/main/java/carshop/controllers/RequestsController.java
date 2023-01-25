@@ -4,6 +4,7 @@ import carshop.model.entity.Storage;
 import carshop.service.RequestService;
 import carshop.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,8 @@ public class RequestsController {
     }
 
     @GetMapping("/requests")
-    public String getRequests(Model model){
-        model.addAttribute("requests", requestService.getAllRequests());
+    public String getRequests(Model model, Authentication authentication){
+        model.addAttribute("requests", requestService.getAllRequestsForUser(authentication.getName()));
         model.addAttribute("storages", storageService.getAllStorageAdverts());
 
         return "requests";

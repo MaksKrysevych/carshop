@@ -94,15 +94,15 @@
                 <form th:action="@{/profile/edit}" th:method="POST">
                     <div class="form-group">
                         <label><span th:text="#{profile.label.firstname}"/></label>
-                        <input name="name" type="text" th:flied="${user.name}" th:value="${user.name}" class="form-control"/>
+                        <input name="name" type="text" th:flied="${user.name}" th:value="${user.name}" class="form-control" pattern="[A-Z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)" required/>
                     </div>
                     <div class="form-group">
                         <label><span th:text="#{profile.label.lastname}"/></label>
-                        <input name="surname" type="text" th:flied="${user.surname}" th:value="${user.surname}" class="form-control"/>
+                        <input name="surname" type="text" th:flied="${user.surname}" th:value="${user.surname}" class="form-control" pattern="[A-Z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)" required/>
                     </div>
                     <div class="form-group">
                         <label><span th:text="#{profile.label.phone}"/></label>
-                        <input name="phone" type="text" th:flied="${user.phone}" th:value="${user.phone}" class="form-control" maxlength="10"/>
+                        <input name="phone" type="text" th:flied="${user.phone}" th:value="${user.phone}" class="form-control"  pattern="[0-9]{3}[0-9]{2}[0-9]{2}[0-9]{3}" required maxlength="10"/>
                     </div>
                     <button class="btn-primary" type="submit"><span th:text="#{profile.button.edit}"/></button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -121,7 +121,7 @@
                 <form th:action="@{/profile/top-up}" th:method="POST">
                     <div class="form-group">
                         <label><span th:text="#{profile.label.money}"/></label>
-                        <input name="account" type="text" th:flied="${user.account}" class="form-control"/>
+                        <input name="account" type="text" th:flied="${user.account}" class="form-control" pattern="[0-9]*"/>
                     </div>
                     <button class="btn-primary" type="submit"><span th:text="#{profile.button.topup}"/></button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">

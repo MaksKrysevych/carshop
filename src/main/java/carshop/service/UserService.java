@@ -16,6 +16,8 @@ public interface UserService {
 
     User updateUser(User user);
 
+    User updateRoleUsers(User user);
+
     User editUser(User editedUser, Authentication authentication);
 
     User topUp(User user, Authentication authentication);

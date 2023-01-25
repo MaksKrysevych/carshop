@@ -8,21 +8,42 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class RequestServiceImpl implements RequestService {
 
     private final RequestRepository requestRepository;
+    private final UserService userService;
 
     @Autowired
-    public RequestServiceImpl(RequestRepository requestRepository) {
+    public RequestServiceImpl(RequestRepository requestRepository, UserService userService) {
         this.requestRepository = requestRepository;
+        this.userService = userService;
     }
 
     @Override
     public List<Request> getAllRequests() {
+
         return requestRepository.getAllRequests();
+    }
+
+    @Override
+    public List<Request> getAllRequestsForUser(String email) {
+        if (userService.getUserByEmail(email).getRole().equals("USER")) {
+            List<Request> requests = requestRepository.getAllRequests();
+            List<Request> usersRequests = new ArrayList<>();
+            for (var request : requests) {
+                if (request.getEmail().equals(email)){
+                    usersRequests.add(request);
+                }
+            }
+            return usersRequests;
+        }
+        else {
+            return requestRepository.getAllRequests();
+        }
     }
 
     @Override

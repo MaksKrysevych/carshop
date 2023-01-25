@@ -67,10 +67,10 @@
 <div class="container">
     <table class="table table-bordered">
         <tr>
-            <th th:text="#{user.button.email}"></th>
-            <th th:text="#{user.button.name}"></th>
-            <th th:text="#{user.button.surname}"></th>
-            <th th:text="#{user.button.role}"></th>
+            <th th:text="#{user.label.email}"></th>
+            <th th:text="#{user.label.name}"></th>
+            <th th:text="#{user.label.surname}"></th>
+            <th th:text="#{user.label.role}"></th>
         </tr>
         <tr th:each="user : ${users}">
             <td><span th:text="${user.email}"></span></td>
@@ -92,6 +92,10 @@
                         <span th:if="${user.role == 'ADMIN'}">
                             <option selected hidden th:value="'ADMIN'" th:text="#{user.role.admin}"></option>
                         </span>
+
+                        <input name="email" type="hidden" th:value="${user.email}">
+
+                        <button class="btn-primary" type="submit"><span th:text="#{user.button.update}"></span></button>
                     </select>
                 </form>
             </td>

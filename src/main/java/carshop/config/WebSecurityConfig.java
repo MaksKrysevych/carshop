@@ -24,7 +24,7 @@ public class WebSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/catalog/**", "/details/**", "/login", "/login-error", "/sign-up").permitAll()
+                        .requestMatchers("/", "/catalog/**", "/details/**", "/login", "/login-error", "/sign-up", "/error").permitAll()
                         .requestMatchers("/gallery/**", "/advertisements/**", "/cars/**").hasAnyAuthority("ADMIN", "MANAGER")
                         .requestMatchers("/users/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
@@ -43,7 +43,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

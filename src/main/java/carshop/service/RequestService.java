@@ -8,6 +8,8 @@ import java.util.List;
 public interface RequestService {
     List<Request> getAllRequests();
 
+    List<Request> getAllRequestsForUser(String email);
+
     Request getRequestById(Long id);
 
     Request createRequest(Request request);

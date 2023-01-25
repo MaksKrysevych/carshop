@@ -59,42 +59,43 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="form_password"><span th:text="#{signUp.label.password}"/></label>
-                                <input id="form_password" type="password" th:field="*{password}" class="form-control"
+                                <input id="form_password" type="password" th:field="*{password}"
+                                       class="form-control js-name"
                                        required="required">
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="form_name"><span th:text="#{signUp.label.name}"/></label>
-                                <input id="form_name" type="text" th:field="*{name}" class="form-control"
-                                       required="required" th:placeholder="#{signUp.placeholder.name}">
+                                <input id="form_name" type="text" th:field="*{name}" class="form-control js-name"
+                                       required="required" th:placeholder="#{signUp.placeholder.name}"
+                                       pattern="[A-Z\u0410-\u042F]{1}[a-z\u0430-\u044f]{2-44}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="form_lastname"><span th:text="#{signUp.label.surname}"/></label>
-                                <input id="form_lastname" type="text" th:field="*{surname}" class="form-control"
-                                       required="required" th:placeholder="#{signUp.placeholder.surname}">
+                                <input id="form_lastname" type="text" th:field="*{surname}"
+                                       class="form-control  js-name"
+                                       required="required" th:placeholder="#{signUp.placeholder.surname}"
+                                       pattern="[A-Z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)">
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
-
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="form_phone"><span th:text="#{signUp.label.phone}"/></label>
-                                <input id="form_phone" type="tel" th:field="${user.phone}" class="form-control"
-                                       th:placeholder="#{signUp.placeholder.phone}">
+                                <input id="form_phone" type="text" th:field="${user.phone}" class="form-control"
+                                       th:placeholder="#{signUp.placeholder.phone}"
+                                       pattern="[0-9]{3}[0-9]{2}[0-9]{2}[0-9]{3}" required maxlength="10">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-
                         <div class="col-md-12">
                             <div class="form-group">
                                 <!-- Replace data-sitekey with your own one, generated at https://www.google.com/recaptcha/admin -->
@@ -136,4 +137,23 @@
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="https://bootstraptema.ru/snippets/form/2017/recaptcha/validator.js"></script>
 <script src="https://bootstraptema.ru/snippets/form/2017/recaptcha/contact.js"></script>
+<script>
+    function alphaOnly() {
+        let nameInput = document.querySelectorAll('.js-name');
+        nameInput.forEach((input) => {
+
+            input.addEventListener('keydown', (e) => {
+                let charCode = e.keyCode;
+
+                if ((charCode >= 65 && charCode <= 90) || charCode == 8 || charCode == 32) {
+                    null;
+                } else {
+                    e.preventDefault();
+                }
+            });
+        });
+    }
+
+    alphaOnly();
+</script>
 </html>
