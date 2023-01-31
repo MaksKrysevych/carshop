@@ -23,6 +23,11 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
+    public List<Gallery> getGalleryByPage(int page, int galleriesPerPage) {
+        return galleryRepository.getGalleriesByPage(page, galleriesPerPage);
+    }
+
+    @Override
     public Gallery getGalleryById(Long id) {
         return galleryRepository.getGalleryById(id);
     }

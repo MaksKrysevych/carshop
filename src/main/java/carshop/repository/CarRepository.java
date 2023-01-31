@@ -26,6 +26,23 @@ public class CarRepository {
         return cars;
     }
 
+    public List<Car> getCarsByPage(int pageNo, int carsPerPage) {
+        List<Car> cars;
+        int startCar = pageNo * carsPerPage - carsPerPage;
+
+        try (final Session session = factory.openSession()) {
+            session.beginTransaction();
+
+            cars = session.createQuery("from Car ", Car.class)
+                    .setFirstResult(startCar)
+                    .setMaxResults(carsPerPage)
+                    .getResultList();
+
+            session.getTransaction().commit();
+        }
+        return cars;
+    }
+
     public Car getCarById(Long id) {
         try (final Session session = factory.openSession()) {
 

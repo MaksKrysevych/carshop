@@ -30,7 +30,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> getAllRequestsForUser(String email) {
+    public List<Request> getAllRequests(String email, int page, int requestsPerPage) {
         if (userService.getUserByEmail(email).getRole().equals("USER")) {
             List<Request> requests = requestRepository.getAllRequests();
             List<Request> usersRequests = new ArrayList<>();
@@ -42,7 +42,7 @@ public class RequestServiceImpl implements RequestService {
             return usersRequests;
         }
         else {
-            return requestRepository.getAllRequests();
+            return requestRepository.getRequestsByPage(page, requestsPerPage);
         }
     }
 

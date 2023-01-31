@@ -27,7 +27,7 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a th:href="@{/}" class="nav-link px-2 link-dark" th:text="#{header.home}"/></li>
-            <li><a th:href="@{/catalog}" class="nav-link px-2 link-dark" th:text="#{header.catalog}"/></li>
+            <li><a th:href="@{/catalog/1}" class="nav-link px-2 link-dark" th:text="#{header.catalog}"/></li>
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/profile}" class="nav-link px-2 link-dark" th:text="#{header.profile}"/>
             </li>
@@ -44,7 +44,6 @@
     </header>
 </div>
 <div class="row d-flex h-75 justify-content-center align-items-center p-0">
-
     <div class="col-lg-3 col-mb-6 mb-4">
         <div class="row">
             <th:block th:each="advert:${adverts}">
@@ -71,11 +70,30 @@
                                     </a>
                                 </h4>
                             </div>
+                            &nbsp;&nbsp;
+                            &nbsp;&nbsp;
                         </th:block>
                     </strong>
                 </div>
             </th:block>
         </div>
+        <nav aria-label="Navigation for catalog">
+            <div th:if="${totalPages > 1}">
+                <div class="row col-sm-10">
+                    <a th:if="${currentPage > 1}"
+                       th:href="@{/catalog/{pageNo}(pageNo=${currentPage - 1}, sorting=${sorting})}"></span></a>
+                    <span th:unless="${currentPage == 1}"></span>&nbsp;&nbsp;
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                        <a th:if="${currentPage != i}"
+                           th:href="@{/catalog/{pageNo}(pageNo=${i}, sorting=${sorting})}">[[${i}]]</a>
+                        <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                        </span>
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{/catalog/{pageNo}(pageNo=${currentPage + 1}, sorting=${sorting})}"></span></a>
+                    <span th:unless="${currentPage < totalPages}"></span>
+                </div>
+            </div>
+        </nav>
     </div>
 </div>
 <footer class="d-flex justify-content-center py-3">

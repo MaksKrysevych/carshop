@@ -8,6 +8,8 @@ import java.util.List;
 public interface UserService {
     List<User> getAllUsers();
 
+    List<User> getAllUsersByPage(int page, int requestsPerPage);
+
     User getUserByEmail(String email);
 
     User createUser(User user);

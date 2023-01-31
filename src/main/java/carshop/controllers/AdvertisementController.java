@@ -1,6 +1,8 @@
 package carshop.controllers;
 
 import carshop.model.entity.Advertisement;
+import carshop.model.entity.Storage;
+import carshop.model.enums.Statuses;
 import carshop.service.AdvertisementService;
 import carshop.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,21 @@ public class AdvertisementController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/advertisements")
-    public String getAdverts(Model model){
-        model.addAttribute("adverts", advertisementService.getAllAdverts());
+    @GetMapping("/advertisements/{page}")
+    public String getAdverts(@PathVariable(value = "page") int pageNo, Model model){
+        int recordsPerPage = 2;
+        int rows = advertisementService.getAllAdverts().size();
+        int noOfPages = rows / recordsPerPage;
+
+        if (rows % recordsPerPage != 0) {
+            noOfPages++;
+        }
+
+        model.addAttribute("adverts", advertisementService.getAdvertsByPage(pageNo, recordsPerPage, "advertId"));
         model.addAttribute("advertisement", new Advertisement());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("sorting", "advertId");
+        model.addAttribute("totalPages", noOfPages);
 
         return "advertisements";
     }
@@ -34,7 +47,7 @@ public class AdvertisementController {
     public String createAdvert(@ModelAttribute Advertisement advertisement){
         advertisementService.createAdvert(advertisement);
 
-        return "redirect:/advertisements";
+        return "redirect:/advertisements/1";
     }
 
     @GetMapping("/advertisements/update/{id}")
@@ -48,7 +61,7 @@ public class AdvertisementController {
     public String updateAdvert(@ModelAttribute Advertisement advertisement){
         advertisementService.updateAdvert(advertisement);
 
-        return "redirect:/advertisements";
+        return "redirect:/advertisements/1";
     }
 
     @GetMapping("/advertisements/delete/{id}")
@@ -56,6 +69,6 @@ public class AdvertisementController {
         advertisementService.deleteAdvertById(id);
         storageService.deleteStorageAdvertById(id);
 
-        return "redirect:/advertisements";
+        return "redirect:/advertisements/1";
     }
 }

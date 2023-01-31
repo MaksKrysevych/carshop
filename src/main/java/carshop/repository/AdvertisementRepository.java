@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 @Transactional
 public class AdvertisementRepository {
@@ -19,6 +20,22 @@ public class AdvertisementRepository {
             session.beginTransaction();
 
             advertisements = session.createQuery("from Advertisement ", Advertisement.class).getResultList();
+
+            session.getTransaction().commit();
+        }
+        return advertisements;
+    }
+
+    public List<Advertisement> getAdvertsByPage(int pageNo, int advertsPerPage, String sorting) {
+        List<Advertisement> advertisements;
+        int startAdvert = pageNo * advertsPerPage - advertsPerPage;
+
+        try (final Session session = factory.openSession()) {
+            session.beginTransaction();
+            advertisements = session.createQuery("FROM Advertisement ORDER BY " + sorting , Advertisement.class)
+                    .setFirstResult(startAdvert)
+                    .setMaxResults(advertsPerPage)
+                    .getResultList();
 
             session.getTransaction().commit();
         }

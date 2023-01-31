@@ -26,6 +26,23 @@ public class UserRepository {
         return users;
     }
 
+    public List<User> getAllUsersByPage(int pageNo, int usersPerPage) {
+        List<User> users;
+        int startUser = pageNo * usersPerPage - usersPerPage;
+
+        try (final Session session = factory.openSession()) {
+            session.beginTransaction();
+
+            users = session.createQuery("from User ", User.class)
+                    .setFirstResult(startUser)
+                    .setMaxResults(usersPerPage)
+                    .getResultList();
+
+            session.getTransaction().commit();
+        }
+        return users;
+    }
+
     public User getUserByEmail(String email) {
         try (final Session session = factory.openSession()) {
 

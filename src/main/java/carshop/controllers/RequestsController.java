@@ -20,10 +20,20 @@ public class RequestsController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/requests")
-    public String getRequests(Model model, Authentication authentication){
-        model.addAttribute("requests", requestService.getAllRequestsForUser(authentication.getName()));
+    @GetMapping("/requests/{page}")
+    public String getRequests(@PathVariable(value = "page") int pageNo, Model model, Authentication authentication){
+        int recordsPerPage = 2;
+        int rows = requestService.getAllRequests().size();
+        int noOfPages = rows / recordsPerPage;
+
+        if (rows % recordsPerPage != 0) {
+            noOfPages++;
+        }
+
+        model.addAttribute("requests", requestService.getAllRequests(authentication.getName(), pageNo, recordsPerPage));
         model.addAttribute("storages", storageService.getAllStorageAdverts());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", noOfPages);
 
         return "requests";
     }
@@ -32,20 +42,20 @@ public class RequestsController {
     public String changeStatusOfRequest(@ModelAttribute Storage updatedStatus){
         storageService.updateStorageAdvert(updatedStatus);
 
-        return "redirect:/requests";
+        return "redirect:/requests/1";
     }
 
     @GetMapping("/request/delete/{id}")
     public String deleteRequestById(@PathVariable Long id){
         requestService.deleteRequestById(id);
 
-        return "redirect:/requests";
+        return "redirect:/requests/1";
     }
 
     @GetMapping("/request/reserve/{id}")
     public String reserveCarById(@PathVariable Long id){
         storageService.reserveCarById(id);
 
-        return "redirect:/requests";
+        return "redirect:/requests/1";
     }
 }

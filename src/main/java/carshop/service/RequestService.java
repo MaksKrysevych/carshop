@@ -8,7 +8,7 @@ import java.util.List;
 public interface RequestService {
     List<Request> getAllRequests();
 
-    List<Request> getAllRequestsForUser(String email);
+    List<Request> getAllRequests(String email, int page, int requestsPerPage);
 
     Request getRequestById(Long id);
 

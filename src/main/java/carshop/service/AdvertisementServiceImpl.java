@@ -4,6 +4,7 @@ import carshop.model.entity.Advertisement;
 import carshop.repository.AdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     @Override
     public List<Advertisement> getAllAdverts() {
         return advertisementRepository.getAllAdverts();
+    }
+
+    @Override
+    public List<Advertisement> getAdvertsByPage(int pageNo, int advertsPerPage,  String sorting) {
+        return advertisementRepository.getAdvertsByPage(pageNo, advertsPerPage, sorting);
     }
 
     @Override

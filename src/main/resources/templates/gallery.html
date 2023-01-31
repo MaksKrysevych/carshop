@@ -27,7 +27,7 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a th:href="@{/}" class="nav-link px-2 link-dark" th:text="#{header.home}"/></li>
-            <li><a th:href="@{/catalog}" class="nav-link px-2 link-dark" th:text="#{header.catalog}"/></li>
+            <li><a th:href="@{/catalog/1}" class="nav-link px-2 link-dark" th:text="#{header.catalog}"/></li>
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/profile}" class="nav-link px-2 link-dark" th:text="#{header.profile}"/>
             </li>
@@ -44,21 +44,21 @@
     </header>
     <div class="container">
         <ul class="nav nav-pills">
-            <li class="nav-item"><a th:href="@{/requests}" class="nav-link px-2 link-dark"
+            <li class="nav-item"><a th:href="@{/requests/1}" class="nav-link px-2 link-dark"
                                     th:text="#{profile.button.requests}"></a></li>
-            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/advertisements}"
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/advertisements/1}"
                                                                                         class="nav-link px-2 link-dark"
                                                                                         th:text="#{profile.button.advertisement}"></a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/gallery}"
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/gallery/1}"
                                                                                         class="nav-link px-2 link-dark"
                                                                                         th:text="#{profile.button.gallery}"></a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/cars}"
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/cars/1}"
                                                                                         class="nav-link px-2 link-dark"
                                                                                         th:text="#{profile.button.cars}"></a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/users}"
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/users/1}"
                                                                           class="nav-link px-2 link-dark"
                                                                           th:text="#{profile.button.users}"></a></li>
         </ul>
@@ -91,6 +91,23 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createGallery">
         <span th:text="#{gallery.button.create}"/>
     </button>
+    <nav aria-label="Navigation for gallery">
+        <div th:if="${totalPages > 1}">
+            <div class="row col-sm-10">
+                <a th:if="${currentPage > 1}"
+                   th:href="@{/gallery/{pageNo}(pageNo=${currentPage - 1})}"></span></a>
+                <span th:unless="${currentPage == 1}"></span>&nbsp;&nbsp;
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                        <a th:if="${currentPage != i}"
+                           th:href="@{/gallery/{pageNo}(pageNo=${i})}">[[${i}]]</a>
+                        <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                        </span>
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{/gallery/{pageNo}(pageNo=${currentPage + 1})}"></span></a>
+                <span th:unless="${currentPage < totalPages}"></span>
+            </div>
+        </div>
+    </nav>
 </div>
 <!-- Modal create -->
 <div class="modal fade" id="createGallery" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

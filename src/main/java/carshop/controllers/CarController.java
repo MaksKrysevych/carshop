@@ -17,11 +17,20 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping("/cars")
-    public String getCars(Model model){
-        model.addAttribute("cars", carService.getAllCars());
-        model.addAttribute("car", new Car());
+    @GetMapping("/cars/{page}")
+    public String getCars(@PathVariable(value = "page") int pageNo, Model model){
+        int recordsPerPage = 2;
+        int rows = carService.getAllCars().size();
+        int noOfPages = rows / recordsPerPage;
 
+        if (rows % recordsPerPage != 0) {
+            noOfPages++;
+        }
+
+        model.addAttribute("cars", carService.getCarsByPage(pageNo,recordsPerPage));
+        model.addAttribute("car", new Car());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", noOfPages);
         return "cars";
     }
 
@@ -29,7 +38,7 @@ public class CarController {
     public String createCar(@ModelAttribute Car car){
         carService.createCar(car);
 
-        return "redirect:/cars";
+        return "redirect:/cars/1";
     }
 
     @GetMapping("/cars/update/{id}")
@@ -40,16 +49,16 @@ public class CarController {
     }
 
     @PostMapping("/car/update")
-    public String updateAdvert(@ModelAttribute Car car){
+    public String updateCar(@ModelAttribute Car car){
         carService.updateCar(car);
 
-        return "redirect:/cars";
+        return "redirect:/cars/1";
     }
 
     @GetMapping("/cars/delete/{id}")
-    public String getCars(@PathVariable Long id){
+    public String deleteCar(@PathVariable Long id){
         carService.deleteCarById(id);
 
-        return "redirect:/cars";
+        return "redirect:/cars/1";
     }
 }

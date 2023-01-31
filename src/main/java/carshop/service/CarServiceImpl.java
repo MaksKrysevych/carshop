@@ -4,6 +4,7 @@ import carshop.model.entity.Car;
 import carshop.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -19,6 +20,11 @@ public class CarServiceImpl implements CarService{
     @Override
     public List<Car> getAllCars() {
         return carRepository.getAllCars();
+    }
+
+    @Override
+    public List<Car> getCarsByPage(int page, int carsPerPage) {
+        return carRepository.getCarsByPage(page, carsPerPage);
     }
 
     @Override

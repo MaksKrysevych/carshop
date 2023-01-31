@@ -27,6 +27,23 @@ public class RequestRepository {
         return requests;
     }
 
+    public List<Request> getRequestsByPage(int pageNo, int requestsPerPage) {
+        List<Request> requests;
+        int startRequest = pageNo * requestsPerPage - requestsPerPage;
+
+        try (final Session session = factory.openSession()) {
+            session.beginTransaction();
+
+            requests = session.createQuery("from Request ", Request.class)
+                    .setFirstResult(startRequest)
+                    .setMaxResults(requestsPerPage)
+                    .getResultList();
+
+            session.getTransaction().commit();
+        }
+        return requests;
+    }
+
     public Request getRequestById(Long id) {
         try (final Session session = factory.openSession()) {
 

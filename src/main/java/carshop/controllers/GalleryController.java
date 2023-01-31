@@ -19,10 +19,21 @@ public class GalleryController {
         this.galleryService = galleryService;
     }
 
-    @GetMapping("/gallery")
-    public String getPhotosFromGallery(Model model){
-        model.addAttribute("gallery", galleryService.getAllGalleries());
+    @GetMapping("/gallery/{page}")
+    public String getPhotosFromGallery(@PathVariable(value = "page") int pageNo, Model model){
+        int recordsPerPage = 2;
+        int rows = galleryService.getAllGalleries().size();
+        int noOfPages = rows / recordsPerPage;
+
+        if (rows % recordsPerPage != 0) {
+            noOfPages++;
+        }
+
+
+        model.addAttribute("gallery", galleryService.getGalleryByPage(pageNo, recordsPerPage));
         model.addAttribute("photo", new Gallery());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", noOfPages);
 
         return "gallery";
     }
@@ -31,7 +42,7 @@ public class GalleryController {
     public String createAdvert(@ModelAttribute Gallery photo){
         galleryService.createGallery(photo);
 
-        return "redirect:/gallery";
+        return "redirect:/gallery/1";
     }
 
     @GetMapping("/photo/update/{id}")
@@ -45,13 +56,13 @@ public class GalleryController {
     public String updateGallery(@ModelAttribute Gallery photo){
         galleryService.updateGallery(photo);
 
-        return "redirect:/gallery";
+        return "redirect:/gallery/1";
     }
 
     @GetMapping("/photo/delete/{id}")
     public String deleteGalleryById(@PathVariable Long id){
         galleryService.deleteGalleryById(id);
 
-        return "redirect:/gallery";
+        return "redirect:/gallery/1";
     }
 }

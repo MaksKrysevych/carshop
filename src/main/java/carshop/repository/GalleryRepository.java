@@ -26,6 +26,23 @@ public class GalleryRepository {
         return galleries;
     }
 
+    public List<Gallery> getGalleriesByPage(int pageNo, int galleriesPerPage) {
+        List<Gallery> galleries;
+        int startGallery = pageNo * galleriesPerPage - galleriesPerPage;
+
+        try (final Session session = factory.openSession()) {
+            session.beginTransaction();
+
+            galleries = session.createQuery("from Gallery ", Gallery.class)
+                    .setFirstResult(startGallery)
+                    .setMaxResults(galleriesPerPage)
+                    .getResultList();
+
+            session.getTransaction().commit();
+        }
+        return galleries;
+    }
+
     public Gallery getGalleryById(Long id) {
         try (final Session session = factory.openSession()) {
 

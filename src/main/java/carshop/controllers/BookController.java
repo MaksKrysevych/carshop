@@ -20,6 +20,6 @@ public class BookController {
     public String book(@PathVariable("id") Long advert_id, Authentication authentication){
         requestService.book(advert_id, authentication);
 
-        return "redirect:/requests";
+        return "redirect:/requests/1";
     }
 }

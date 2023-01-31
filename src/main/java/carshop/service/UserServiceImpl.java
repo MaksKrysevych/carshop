@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public List<User> getAllUsersByPage(int page, int usersPerPage) {
+        return userRepository.getAllUsersByPage(page, usersPerPage);
+    }
+
+    @Override
     public User getUserByEmail(String email) {
         return userRepository.getUserByEmail(email);
     }

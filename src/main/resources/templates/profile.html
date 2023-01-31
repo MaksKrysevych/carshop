@@ -27,7 +27,7 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a th:href="@{/}" class="nav-link px-2 link-dark" th:text="#{header.home}"/></li>
-            <li><a th:href="@{/catalog}" class="nav-link px-2 link-dark" th:text="#{header.catalog}"/></li>
+            <li><a th:href="@{/catalog/1}" class="nav-link px-2 link-dark" th:text="#{header.catalog}"/></li>
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/profile}" class="nav-link px-2 link-dark" th:text="#{header.profile}"/>
             </li>
@@ -44,21 +44,21 @@
     </header>
     <div class="container">
         <ul class="nav nav-pills">
-            <li class="nav-item"><a th:href="@{/requests}" class="nav-link px-2 link-dark"
+            <li class="nav-item"><a th:href="@{/requests/1}" class="nav-link px-2 link-dark"
                                     th:text="#{profile.button.requests}"></a></li>
-            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/advertisements}"
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/advertisements/1}"
                                                                                         class="nav-link px-2 link-dark"
                                                                                         th:text="#{profile.button.advertisement}"></a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/gallery}"
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/gallery/1}"
                                                                                         class="nav-link px-2 link-dark"
                                                                                         th:text="#{profile.button.gallery}"></a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/cars}"
+            <li class="nav-item" sec:authorize="hasAnyAuthority('MANAGER', 'ADMIN')"><a th:href="@{/cars/1}"
                                                                                         class="nav-link px-2 link-dark"
                                                                                         th:text="#{profile.button.cars}"></a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/users}"
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/users/1}"
                                                                           class="nav-link px-2 link-dark"
                                                                           th:text="#{profile.button.users}"></a></li>
         </ul>
