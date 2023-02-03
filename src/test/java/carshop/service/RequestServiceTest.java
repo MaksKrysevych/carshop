@@ -58,7 +58,7 @@ class RequestServiceTest {
     @Test
     void updateRequest() {
         when(requestRepository.createRequest(new Request(1L, 2L, "1", Date.valueOf("2022-02-22")))).thenReturn(requestList.get(1));
-        assertEquals(requestList.get(1).getAdvertId(), requestService.createRequest(new Request(1L, 1L, "1", Date.valueOf("2022-02-22"))).getAdvertId());
+        assertEquals(requestList.get(1).getAdvertId(), requestService.createRequest(new Request(1L, 2L, "1", Date.valueOf("2022-02-22"))).getAdvertId());
 
     }
 
