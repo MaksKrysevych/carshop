@@ -1,8 +1,6 @@
 package carshop.controllers;
 
 import carshop.model.entity.Advertisement;
-import carshop.model.entity.Storage;
-import carshop.model.enums.Statuses;
 import carshop.service.AdvertisementService;
 import carshop.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
