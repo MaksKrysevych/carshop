@@ -2,10 +2,17 @@ language: java
 jdk:
   - openjdk17
 
-
 # Встановлення залежностей
 install: true
 
 # Запуск тестів
 script:
   - mvn clean test
+  - echo "Tests completed with exit code $?" >> results.log
+
+# Створення та публікація Docker-образу
+after_script:
+  - docker build -t gcr.io/my-project-436711/carshop .
+  - echo "$GCLOUD_SERVICE_KEY" | docker login -u _json_key --password-stdin https://gcr.io
+  - docker push gcr.io/my-project-436711/carshop
+  - echo "Docker image pushed successfully." >> results.log
